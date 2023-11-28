@@ -12,11 +12,7 @@ fn main() {
 }
 
 fn part1(file: &String) -> u32 {
-    let mut file = File::open(file).expect("Error opening file.");
-    let mut content = String::new();
-    file.read_to_string(&mut content).expect("Error reading file");
-
-    let mut digits: Vec<u32> = content.trim().chars().map(|c| c.to_digit(10).expect("Error parsing digit")).collect();
+    let mut digits = parse_input(file);
     digits.push(digits[0]);
 
     let mut sum: u32 = 0;
@@ -30,10 +26,7 @@ fn part1(file: &String) -> u32 {
 }
 
 fn part2(file: &String) -> u32 {
-    let mut file = File::open(file).expect("Error opening file.");
-    let mut content = String::new();
-    file.read_to_string(&mut content).expect("Error reading file");
-    let digits: Vec<u32> = content.trim().chars().map(|c| c.to_digit(10).expect("Error parsing digit")).collect();
+    let digits = parse_input(file);
 
     let mut sum: u32 = 0;
     let len = digits.len();
@@ -46,5 +39,12 @@ fn part2(file: &String) -> u32 {
     }
 
     sum
+}
+
+fn parse_input(file: &String) -> Vec<u32> {
+    let mut file = File::open(file).expect("Error opening file.");
+    let mut content = String::new();
+    file.read_to_string(&mut content).expect("Error reading file");
+    content.trim().chars().map(|c| c.to_digit(10).expect("Error parsing digit")).collect()
 }
 
