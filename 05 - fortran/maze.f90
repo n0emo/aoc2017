@@ -116,6 +116,5 @@ integer function part2(jumps_arr, length)
         count = count + 1
     end do
 
-
     part2 = count
 end function part2
